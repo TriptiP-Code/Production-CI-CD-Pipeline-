@@ -5,7 +5,8 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/TriptiP-Code/Production-CI-CD-Pipeline-'
+                git branch: 'main',
+                    url: 'https://github.com/TriptiP-Code/Production-CI-CD-Pipeline-'
             }
         }
 
