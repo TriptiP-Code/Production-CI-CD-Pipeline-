@@ -1,12 +1,12 @@
 pipeline {
+
     agent any
 
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/TriptiP-Code/Production-CI-CD-Pipeline-'
+                checkout scm
             }
         }
 
@@ -18,28 +18,46 @@ pipeline {
 
         stage('Sonar Scan') {
             steps {
-                sh '''
-                sonar-scanner \
-                -Dsonar.projectKey=flask-app \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=http://localhost:9000 \
-                -Dsonar.login=squ_fdef76eff0c0eeec6d54020803c88489d93da954
-                '''
+                withSonarQubeEnv('SonarQube') {
+                    withCredentials([
+                        string(
+                            credentialsId: 'sonar-token',
+                            variable: 'SONAR_TOKEN'
+                        )
+                    ]) {
+                        sh '''
+                            sonar-scanner \
+                            -Dsonar.projectKey=flask-app \
+                            -Dsonar.sources=. \
+                            -Dsonar.token=$SONAR_TOKEN
+                        '''
+                    }
+                }
             }
         }
 
         stage('Deploy') {
             steps {
                 sh '''
-                docker stop flask-container || true
-                docker rm flask-container || true
+                    docker stop flask-app || true
+                    docker rm flask-app || true
 
-                docker run -d \
-                --name flask-container \
-                -p 5000:5000 \
-                flask-app
+                    docker run -d \
+                        --name flask-app \
+                        -p 5000:5000 \
+                        flask-app
                 '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'CI/CD Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'CI/CD Pipeline failed!'
         }
     }
 }
