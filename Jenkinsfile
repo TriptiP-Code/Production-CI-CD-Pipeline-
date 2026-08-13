@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'YOUR_GITHUB_REPO'
+                git 'https://github.com/TriptiP-Code/Production-CI-CD-Pipeline-'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
                 -Dsonar.projectKey=flask-app \
                 -Dsonar.sources=. \
                 -Dsonar.host.url=http://localhost:9000 \
-                -Dsonar.login=TOKEN
+                -Dsonar.login=squ_fdef76eff0c0eeec6d54020803c88489d93da954
                 '''
             }
         }
