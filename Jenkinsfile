@@ -18,20 +18,20 @@ pipeline {
 
         stage('Sonar Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    withCredentials([
-                        string(
-                            credentialsId: 'sonar-token',
-                            variable: 'SONAR_TOKEN'
-                        )
-                    ]) {
-                        sh '''
-                            sonar-scanner \
-                            -Dsonar.projectKey=flask-app \
-                            -Dsonar.sources=. \
-                            -Dsonar.token=$SONAR_TOKEN
-                        '''
-                    }
+                withCredentials([
+                    string(
+                        credentialsId: 'sonar-token',
+                        variable: 'SONAR_TOKEN'
+                    )
+                ]) {
+                    sh '''
+                        docker run --rm \
+                            --network jenkins \
+                            -e SONAR_HOST_URL=http://sonarqube:9000 \
+                            -e SONAR_TOKEN=$SONAR_TOKEN \
+                            -v "$WORKSPACE:/usr/src" \
+                            sonarsource/sonar-scanner-cli
+                    '''
                 }
             }
         }
