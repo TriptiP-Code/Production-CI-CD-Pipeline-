@@ -90,7 +90,8 @@ Add your screenshot files to the `screenshots` folder with these names.
 
 ### Application Running
 
-![Flask application](screenshots/flask-app.png)
+![Uploading image.png…]()
+
 
 ### GitHub Actions CI Success
 
