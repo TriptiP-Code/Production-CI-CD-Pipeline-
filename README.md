@@ -90,16 +90,18 @@ Add your screenshot files to the `screenshots` folder with these names.
 
 ### Application Running
 
-![Uploading image.png…]()
+<img width="1248" height="874" alt="image" src="https://github.com/user-attachments/assets/dd57018d-ac71-4f76-af83-5864aaf18ec1" />
 
 
 ### GitHub Actions CI Success
 
-![GitHub Actions success](screenshots/github-actions-success.png)
+<img width="1243" height="853" alt="image" src="https://github.com/user-attachments/assets/d6e9c7be-d033-46c0-9149-548db44d1cdd" />
+
 
 ### Jenkins Dashboard
 
-![Jenkins dashboard](screenshots/jenkins-dashboard.png)
+![Uploading image.png…]()
+
 
 ### Jenkins Pipeline Success
 
