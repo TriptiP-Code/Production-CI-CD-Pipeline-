@@ -86,34 +86,35 @@ Every push to `main` installs dependencies, executes the test suite, and builds 
 
 ## Proof of Execution
 
-Add your screenshot files to the `screenshots` folder with these names.
 
 ### Application Running
 
-<img width="1248" height="874" alt="image" src="https://github.com/user-attachments/assets/dd57018d-ac71-4f76-af83-5864aaf18ec1" />
+<img width="1919" height="1012" alt="image" src="https://github.com/user-attachments/assets/2d9c2e90-ebca-429d-9de1-8bcd12884dd4" />
 
 
 ### GitHub Actions CI Success
 
-<img width="1243" height="853" alt="image" src="https://github.com/user-attachments/assets/d6e9c7be-d033-46c0-9149-548db44d1cdd" />
-
+<img width="1248" height="874" alt="image" src="https://github.com/user-attachments/assets/dd57018d-ac71-4f76-af83-5864aaf18ec1" />
 
 ### Jenkins Dashboard
 
-![Uploading image.png…]()
+<img width="1256" height="857" alt="image" src="https://github.com/user-attachments/assets/600d62e2-3d23-4208-9f42-e9a8820f1609" />
 
 
 ### Jenkins Pipeline Success
 
-![Jenkins pipeline success](screenshots/jenkins-pipeline-success.png)
+<img width="1264" height="862" alt="image" src="https://github.com/user-attachments/assets/4dbef58f-ee72-4579-9eed-352d6e3480ec" />
+
 
 ### SonarQube Quality Dashboard
 
-![SonarQube overview](screenshots/sonarqube-overview.png)
+<img width="1260" height="862" alt="image" src="https://github.com/user-attachments/assets/ad76de91-7827-42a1-b59b-f9060e7d1b5f" />
+
 
 ### SonarQube Analysis Activity
 
-![SonarQube analysis activity](screenshots/sonarqube-activity.png)
+<img width="1259" height="857" alt="image" src="https://github.com/user-attachments/assets/a26f5a94-7e0d-4019-9c58-a69e86ae9b93" />
+
 
 ## Stop local services
 
