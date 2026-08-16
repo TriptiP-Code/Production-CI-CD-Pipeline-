@@ -38,7 +38,11 @@ pipeline {
             steps {
                 sh '''
                     echo "Running automated tests..."
-                    docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} pytest -q
+                    docker run --rm \
+                        --user "$(id -u):$(id -g)" \
+                        -v "${WORKSPACE}:/app" \
+                        ${IMAGE_NAME}:${BUILD_NUMBER} \
+                        pytest -q --cov=. --cov-report=xml:coverage.xml
                 '''
             }
         }
@@ -65,6 +69,8 @@ pipeline {
                             sonar-scanner \
                             -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                             -Dsonar.sources=/usr/src \
+                            -Dsonar.python.version=3.11 \
+                            -Dsonar.python.coverage.reportPaths=/usr/src/coverage.xml \
                             -Dsonar.host.url=${SONAR_HOST_URL} \
                             -Dsonar.token=${SONAR_TOKEN} \
                             -Dsonar.qualitygate.wait=true
