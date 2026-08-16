@@ -34,6 +34,15 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh '''
+                    echo "Running automated tests..."
+                    docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} pytest -q
+                '''
+            }
+        }
+
         stage('Sonar Scan') {
             steps {
 
@@ -57,7 +66,8 @@ pipeline {
                             -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
                             -Dsonar.sources=/usr/src \
                             -Dsonar.host.url=${SONAR_HOST_URL} \
-                            -Dsonar.token=${SONAR_TOKEN}
+                            -Dsonar.token=${SONAR_TOKEN} \
+                            -Dsonar.qualitygate.wait=true
 
                         echo "SonarQube scan completed"
                     '''
@@ -79,13 +89,17 @@ pipeline {
 
                     echo "Container started"
 
-                    sleep 5
-
-                    docker ps
-
-                    echo "Checking application..."
+                    for attempt in 1 2 3 4 5; do
+                        if docker inspect --format='{{.State.Health.Status}}' ${CONTAINER_NAME} | grep -q healthy; then
+                            echo "Application is healthy"
+                            exit 0
+                        fi
+                        sleep 3
+                    done
 
                     docker logs ${CONTAINER_NAME} --tail 50
+                    echo "Application did not become healthy"
+                    exit 1
                 '''
             }
         }
