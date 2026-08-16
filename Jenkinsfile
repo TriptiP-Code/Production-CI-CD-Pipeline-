@@ -57,7 +57,7 @@ pipeline {
                         echo "Starting SonarQube scan..."
 
                         docker run --rm \
-                            --network jenkins \
+                            --network host \
                             -e SONAR_HOST_URL=${SONAR_HOST_URL} \
                             -e SONAR_TOKEN=${SONAR_TOKEN} \
                             -v "${WORKSPACE}:/usr/src" \
